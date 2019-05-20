@@ -9,7 +9,8 @@ RUN apk --no-cache add \
   sqlite-dev
 
 # Application server
-RUN gem install mailcatcher
+ADD Gemfile Gemfile.lock ./
+RUN bundle install
 
 # Expose ports
 EXPOSE 25 1080
