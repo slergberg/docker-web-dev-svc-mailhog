@@ -6,13 +6,12 @@ on:
       - master
 
 jobs:
-  build-latest:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-
+      - name: Checkout source code
+        uses: actions/checkout@v2.2.0
       - name: Build the Docker image
-        run: docker build --file Dockerfile --tag ${DOCKER_ORGANIZATION_NAME}/${DOCKER_IMAGE_NAME}:latest .
-        env:
-          DOCKER_ORGANIZATION_NAME: ${{ secrets.DOCKER_ORGANIZATION_NAME }}
-          DOCKER_IMAGE_NAME: ${{ secrets.DOCKER_IMAGE_NAME }}
+        uses: docker/build-push-action@v1.1.0
+        with:
+          push: false
